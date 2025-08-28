@@ -1,4 +1,21 @@
 #include <QCoreApplication>
+#include <QSharedPointer>
+#include <vector>
+#include "cat.h"
+#include "toy.h"
+
+void test()
+{
+    int max = 5;
+    QSharedPointer<Toy> toy (new Toy());
+    std::vector<QSharedPointer<Cat>> cats(max);
+
+    for (int i = 0;  i < max; i++) {
+        cats[i].reset(new Cat());
+        cats[i]->play(toy);
+    }
+    qInfo() << "All cats are done";
+}
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +31,7 @@ int main(int argc, char *argv[])
 
     // If you do not need a running Qt event loop, remove the call
     // to a.exec() or use the Non-Qt Plain C++ Application template.
+    test();
 
     return a.exec();
 }
